@@ -1,0 +1,20 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    title About pug
+    script(type='text/javascript').
+      console.log("pug에 대해 설명")
+    style #container {color: red;}
+
+
+  body
+    h1 HOME
+    p 이것이 바로 pug로 작성한 페이지입니다!
+
+    #container.col
+      if condition
+        p tre
+      else
+        p false!
+
