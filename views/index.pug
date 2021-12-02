@@ -1,57 +1,90 @@
 doctype html
 html(lang="en")
-  head
-    meta(charset="UTF-8")
-    title About pug
-    script(type='text/javascript').
-      console.log("pug에 대해 설명")
-    style #container {color: red;}
+    head
+        meta(charset="UTF-8")
+        title About pug
+        link(rel='stylesheet', href='/css/pug.css')
+        script(src="https://kit.fontawesome.com/d1b79b9b3f.js" crossorigin="anonymous").
+        script(src="/js/nav_btn.js" defer).
+        script(type='text/javascript').
+            console.log("pug에 대해 설명")
 
-  body
-    h1 README
-    p 이력서 및 포트폴리오를 기록하기 위한 사이트입니다.
-    p 상단 위 쪽지 남기기 메뉴 또는 게시글 등록 메뉴를 통해 평가 및 연락을 남겨주시기 바랍니다.
-    h2 기술 스택
-    p FrontEnd
-      ol
-        li React
-        li TypeScript
-    p BackEnd
-      ol
-        li Node
-        li Express
-        li MySQL
-    p 서버 : Amazon RDS
-    h2 개발 환경
-    p
-      ol
-        li intellij IDEA 2021.2
-        li MySQL 8.0.20
+        //style footer {color: red;}
 
-    h2 참조 사이트들
-    p
-      ol
-        li
-          a(href="//codingapple.com/unit/nodejs-react-integration/") 코딩애플 : nodejs,react 연결
-        li
-          a(href="https://runebook.dev/ko/docs/pug/language/attributes")  pug 사용법
-        li
-          a(href="https://velopert.com/reactjs-tutorials") react 사용법
-        li
-          a(href="https://ko.reactjs.org/docs/getting-started.html") react 공식사이트
-        li
-          a(href="https://runebook.dev/ko/docs/pug/language/attributes")  pug 사용법
-        li
-          a(href="https://velopert.com/reactjs-tutorials") react 사용법
-        li
-          a(href="https://ko.reactjs.org/docs/getting-started.html") react 공식사이트
+    body
+
+        nav
+            #nav_logo
+                //i(class="fab fa-readme fa-3x")
+                b README
+            #nav_menu
+
+                li
+                    a(href="/profile") PROFILE
+                li
+                    a(href="https://bellasimi.github.io/") BLOG
+
+                li
+                    a(href="https://github.com/bellasimi")
+                        i(class="fab fa-github fa-2x")
+                li
+                    a(href="mailto:worksy1111@gmail.com")
+                        i(class="far fa-envelope fa-2x")
+
+            #nav_btn
+                a(href="#")
+                    i(class="fas fa-bars fa-3x")
 
 
+        #container
+
+            aside
+                //img(src="image/profile.png")
+
+            section
+
+                p 이력서 및 포트폴리오를 기록하기 위한 사이트입니다.
+                p 상단 위 쪽지 남기기 메뉴 또는 게시글 등록 메뉴를 통해 평가 및 연락을 남겨주시기 바랍니다.
+
+                h2 기술 스택
+
+                p FrontEnd
+                    ol
+                        li React
+                        li TypeScript
+                p BackEnd
+                    ol
+                        li Node
+                        li Express
+                        li MySQL
+                p 서버 : Amazon RDS
+
+                h2 개발 환경
+                p
+                    ol
+                        li intellij IDEA 2021.2
+                        li MySQL 8.0.20
+
+                h2 참조 사이트들
+                p
+                    ol
+                        li
+                            a(href="//codingapple.com/unit/nodejs-react-integration/") 코딩애플 : nodejs,react 연결
+                        li
+                            a(href="https://runebook.dev/ko/docs/pug/language/attributes")  pug 사용법
+                        li
+                            a(href="https://velopert.com/reactjs-tutorials") react 사용법
+                        li
+                            a(href="https://ko.reactjs.org/docs/getting-started.html") react 공식사이트
+                        li
+                            a(href="https://runebook.dev/ko/docs/pug/language/attributes")  pug 사용법
+                        li
+                            a(href="https://velopert.com/reactjs-tutorials") react 사용법
+                        li
+                            a(href="https://ko.reactjs.org/docs/getting-started.html") react 공식사이트
+
+            #calender
 
 
-    #container.col
-      if condition
-        p tre
-      else
-        p 이 페이지는 pug로 작성됐습니다.
-
+        footer
+            Copyright ⓒ 2021 개발의 SHIN. ALL RIGHTS RESERVED
