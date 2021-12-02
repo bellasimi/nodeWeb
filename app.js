@@ -12,10 +12,13 @@ app.get("/",(req,res) => {
     console.log("hello world!");
     res.render("index");
 });
-
+/* 정적 자산 설정 */
+/* node 프로젝트 */
+app.use(express.static(path.join(__dirname,"public")));
+/* react 프로젝트 */
 app.use(express.static(path.join(__dirname,"profile/build")));
 
-app.get("/react",(req,res) => {
+app.get("/profile",(req,res) => {
     res.sendFile(path.join(__dirname,"profile/build/index.html"));
 });
 
