@@ -1,0 +1,232 @@
+@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=IBM+Plex+Sans+KR:wght@600&family=Noto+Sans+KR&display=swap');
+
+:root {
+    --nav_color: white;
+    --nav_logo_color: #c85a54 ;
+    --nav_bg_color: black;
+    --hover_color: #c96f53;
+    --body_bg_color: white; /*#ffebd7*/
+    --content_bg_color: white;
+    --footer_bg_color: black; /*darksalmon*/
+    --footer_color: white;
+}
+
+
+* {
+    box-sizing: border-box;/* 이 설정을 해둬야 화면 크기와 상관없이 글이 안짤림*/
+}
+
+body {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    //justify-content: space-between;
+    background-color: var(--body_bg_color);
+
+}
+
+
+/* nav */
+
+
+nav {
+    height: 90px;
+    background-color: var(--nav_bg_color);
+    color: var(--nav_color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px 0 20px;
+
+}
+
+#nav_logo {
+    margin: 0 0 10px 15px;
+    color: var(--nav_color);
+    font-size: 80pt;
+}
+
+#nav_logo b {
+    /*margin: 0 0 20px 15px;
+    color: var(--nav_logo_color);*/
+    margin-right:5px;
+}
+
+#nav_menu {
+    display: flex;
+    margin-right: 80px
+}
+
+#nav_menu li {
+    list-style: none;
+    padding: 0px 10px 0px 10px;
+    margin-right: 20px;
+}
+
+#nav_menu li a {
+    text-decoration: none;
+    color: var(--nav_color);
+}
+
+#nav_menu li a:hover {
+    color: var(--hover_color);
+    font-weight: bolder;
+}
+
+
+#nav_btn {
+    position: absolute;
+    top: 30px;
+    right: 20px;
+    display: none;
+    color: var(--nav_color);
+}
+
+#nav_btn a{
+    color: var(--nav_color);
+}
+
+/*container(aside,section,#calender)*/
+
+
+#container {
+    display: flex;
+    /*font-family: 'Do Hyeon', sans-serif;*/
+    /*font-family: 'IBM Plex Sans KR', sans-serif;*/
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 20px;
+    line-height: 35px;
+}
+
+aside {
+    width: 15%;
+    margin: 40px 0 0 0;
+}
+
+aside img {
+    margin: 40px 0 0 0;
+
+
+}
+
+section {
+    width: 70%;
+    /*margin: 0 300px 0px 0;*/
+    background-color: var(--content_bg_color);
+    padding: 100px 40px 100px 40px;
+}
+
+#calender {
+    width:15%;
+
+}
+
+
+
+/* footer */
+
+footer {
+    height: 100px;
+    background-color: var(--footer_bg_color);
+    color: var(--footer_color);
+    font-weight: bolder;
+    text-align: center;
+}
+
+footer copyright{
+    position: relative;
+    top: 60px;
+}
+
+@media screen and (max-width: 600px) {
+    #nav_btn {
+        display: block;
+    }
+
+    #nav_menu {
+        display: none;
+        margin-right: 0px;
+    }
+
+    nav {
+        height: auto;
+        flex-direction: column;
+    }
+
+    #nav_logo {
+        margin: 0 0 10px 15px;
+        color: var(--nav_color);
+        font-size: 40pt;
+    }
+
+    #nav_menu.active {
+        display: block;
+        background-color: var(--nav_bg_color);
+
+    }
+
+    #nav_menu.active li{
+        padding: 10px 0 10px 0;
+        text-align: center;
+    }
+
+    #container {
+        flex-direction: column;
+    }
+
+
+}
+
+@media screen and (max-width: 1000px) {
+
+    #nav_btn {
+        display: block;
+    }
+
+    #nav_menu {
+        display: none;
+        margin-right: 0px;
+    }
+
+    nav {
+        height: auto;
+        flex-direction: column;
+    }
+
+    #nav_logo {
+        margin: 8px 20px 10px 5px;
+        color: var(--nav_color);
+        font-size: 40pt;
+    }
+
+    #nav_menu.active {
+        display: block;
+        background-color: var(--nav_bg_color);
+
+    }
+
+    #nav_menu.active li{
+        padding: 10px 0 10px 0;
+        text-align: center;
+    }
+
+    #container {
+        flex-direction: column;
+    }
+    aside {
+        height: auto;
+        width: 100vw;
+    }
+
+    section {
+        height: auto;
+        width: 100vw;
+    }
+
+    #calender {
+        height: auto;
+        width: 100vw;
+
+    }
+}
+
