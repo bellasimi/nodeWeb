@@ -8,18 +8,18 @@ const port = 8282
 app.set("views",__dirname+"/views");
 app.set("view engine","pug");
 
-app.get("/",(req,res) => {
+app.get("/readme",(req,res) => {
     console.log("hello world!");
-    res.render("index");
+    res.render("readme");
 });
 /* 정적 자산 설정 */
 /* node 프로젝트 */
 app.use(express.static(path.join(__dirname,"public")));
 /* react 프로젝트 */
-app.use(express.static(path.join(__dirname,"profile/build")));
+app.use(express.static(path.join(__dirname,"resume/build")));
 
-app.get("/profile",(req,res) => {
-    res.sendFile(path.join(__dirname,"profile/build/index.html"));
+app.get("/",(req,res) => {
+    res.sendFile(path.join(__dirname,"resume/build/index.html"));
 });
 
 app.listen(port,() => console.log("server : http://localhost:8282"));
