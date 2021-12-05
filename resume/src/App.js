@@ -17,6 +17,15 @@ function App() {
     let [프로젝트명, 프로젝트명변경] = useState(["BuyTicketS","Board","nodeWeb"]);
 
 
+    let repArr = [];
+
+    프로젝트명.map(() =>{
+            repArr.push(0)
+    });
+
+    let [good,setGood] = useState(repArr);
+    let [bad,setBad] = useState(repArr);
+
 
     var array = [1,2,3];
 
@@ -30,7 +39,23 @@ function App() {
         return 100;
     }
 
+    /*반복문 함수 */
 
+    const repChange = (rep,idx) => {
+        let goodArr = [...good];
+        let badArr = [...bad];
+
+        if(rep==bad){
+            badArr[idx]+=1;
+            setBad(badArr);
+
+        }
+        else{
+            goodArr[idx]+=1;
+            setGood(goodArr);
+        }
+
+    }
 
 
 
