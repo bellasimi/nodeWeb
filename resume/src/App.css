@@ -64,3 +64,11 @@ nav .nav_menu li{
     transform: rotate(360deg);
   }
 }
+
+.modal {
+    padding: 20px;
+    background: #eee;
+    margin-top: 20px;
+
+
+}
