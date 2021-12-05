@@ -13,6 +13,7 @@ function App() {
     let [추천, 추천변경] = useState(0);
     let [비추, 비추변경] = useState(0);
 
+    let [modal,modal변경] = useState(true); /* Modal창 변경 스위치 */
 
 
     function method(){
@@ -64,6 +65,23 @@ function App() {
                     <span onClick ={ () => { 비추변경(비추+1) }}>👎</span>
                     <span> { 비추 } </span>
                 </p>
+                <button onClick = {() => { modal변경(false)}}>창닫기</button>
+                <button onClick = {() => { modal변경(true)}}>창열기</button>
+
+                <div onClick = { () => { modal변경(!modal); }}>
+                    모달 조작 toggle
+                </div>
+
+                {
+                    modal === true
+                    ? <Modal />
+                    : null
+                }
+                <div className="modal">
+                    <h2>제목</h2>
+                    <p>날짜</p>
+                    <p>상세내용</p>
+                </div>
 
                 사이트이름 개발의 Shin은 두가지 의미가 있습니다.
 
@@ -161,7 +179,15 @@ function App() {
   );
 }
 
-
+function Modal(){
+    return (
+        <div className="modal">
+            <h2>제목</h2>
+            <p>날짜</p>
+            <p>상세내용</p>
+        </div>
+    );
+}
 
 
 export default App;
