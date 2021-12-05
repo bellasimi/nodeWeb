@@ -5,20 +5,34 @@ import './App.css';
 function App() {
     let [글제목,글제목변경] = useState(['이력서 작성','이력서 제출']);/*ES6 destructuring 문법*/
 
-    let [projects,edit] = useState({ BTS:{title:'BuyTickets', tool:'eclipse', stack:'java 8', git:'https://github.com/bellasimi/BuyTicketS'},
-                                                    Board:{title:'board', tool:'intelliJ', stack:'java 8', git:'https://github.com/bellasimi/board'},
-                                                    nodeWeb:{title:'nodeWeb', tool:'intelliJ', stack:'node.js 16', git:'https://github.com/bellasimi/nodeWeb'}
+    let [projects,edit] = useState({ BTS:{title:'BuyTickets', tool:'eclipse', stack:'java 8', git:'https://github.com/bellasimi/BuyTicketS', good: 0, bad: 0},
+                                                    Board:{title:'board', tool:'intelliJ', stack:'java 8', git:'https://github.com/bellasimi/board', good: 0, bad: 0},
+                                                    nodeWeb:{title:'nodeWeb', tool:'intelliJ', stack:'node.js 16', git:'https://github.com/bellasimi/nodeWeb', good: 0, bad: 0}
                                                     });
 
     let [추천, 추천변경] = useState(0);
     let [비추, 비추변경] = useState(0);
 
     let [modal,modal변경] = useState(true); /* Modal창 변경 스위치 */
+    let [프로젝트명, 프로젝트명변경] = useState(["BuyTicketS","Board","nodeWeb"]);
 
+
+
+    var array = [1,2,3];
+
+    /* map 반복문 같지 */
+
+    var newArray = array.map(function(a){
+        return a*2
+    });
 
     function method(){
         return 100;
     }
+
+
+
+
 
     function 제목변경(){ /* return 할 때 변수를 { 제목변경 }이라고 해야지 { 제목변경() }하면 오류
     왜냐, 바로 실행하란 뜻이어서 click 안했을 때도 실행함 */
@@ -96,27 +110,48 @@ function App() {
                 현재까지 아래와 같은 프로젝트를 직행했습니다.
                 </p>
             </div>
+            <h1>프로젝트 목록</h1>
+            {
+                프로젝트명.map((각각의값,idx) => {
+                    return (
+                        <li>{프로젝트명[idx]}
+                            <span onClick = { () => {repChange(good,idx) } }>👍</span>
+                            <span>
+                                {good[idx]}
 
+                            </span>
+                            <span onClick=  { () => { repChange(bad,idx)} }>👎</span>
+                            <span>
+                                 {bad[idx]}
+                            </span>
+                        </li>
+
+                    )
+                })
+
+            }
+
+            <h1>프로젝트 상세</h1>
             <div>
-                {projects.BTS.title}
-                티켓 할인 구매 사이트
+               {projects.BTS.title}
+               티켓 할인 구매 사이트
 
-                <ul>
-                    <li>
-                    개발 스택 : {projects.BTS.stack}
-                    </li>
-                    <li>
-                    개발 환경 : {projects.BTS.tool}
-                    </li>
-                    <li>
-                    Github : {projects.BTS.git}
-                    </li>
-                    <li>
-                    시연영상 :
-                    </li>
-                </ul>
+               <ul>
+                   <li>
+                   개발 스택 : {projects.BTS.stack}
+                   </li>
+                   <li>
+                   개발 환경 : {projects.BTS.tool}
+                   </li>
+                   <li>
+                   Github : {projects.BTS.git}
+                   </li>
+                   <li>
+                   시연영상 :
+                   </li>
+               </ul>
 
-            </div>
+           </div>
 
             <div>
             {projects.Board.title}
