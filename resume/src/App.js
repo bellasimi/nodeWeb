@@ -76,6 +76,7 @@ function App() {
     }
 
     let [modalTitle,setModalTitle] = useState("모달 제목");
+    let [modalIdx,setModalIdx] = useState(0);
 
 
 
@@ -117,7 +118,7 @@ function App() {
 
                 {
                     modal === true
-                    ? <Modal modalTitle={modalTitle} />
+                    ? <Modal modalTitle={modalTitle} modalIdx={modalIdx} 프로젝트명={프로젝트명}/>
                     : null
                 }
                 <div className="modal">
@@ -143,7 +144,7 @@ function App() {
             {
                 프로젝트명.map((각각의값,idx) => {
                     return (
-                        <li onClick = { () => { setModalTitle(각각의값) } }>{프로젝트명[idx]}
+                        <li onClick = { setModalTitle.bind(this,각각의값) }>{프로젝트명[idx]}
                             <span onClick = { () => {repChange(good,idx) } }>👍</span>
                             <span>
                                 {good[idx]}
@@ -159,7 +160,9 @@ function App() {
                 })
 
             }
-
+            <button onClick={setModalIdx.bind(null,0)}>0</button>
+            <button onClick={()=>{setModalIdx(1)}}>1</button>
+            <button onClick={()=>{setModalIdx(2)}}>2</button>
             <h1>프로젝트 상세</h1>
             <div>
                {projects.BTS.title}
@@ -249,6 +252,7 @@ function Modal(props){
             <h2>{props.modalTitle}</h2>
             <p>날짜</p>
             <p>상세내용</p>
+            <p>{props.프로젝트명[props.modalIdx]}</p>
         </div>
     );
 }
