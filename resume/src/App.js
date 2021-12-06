@@ -75,6 +75,10 @@ function App() {
         */
     }
 
+    let [modalTitle,setModalTitle] = useState("모달 제목");
+
+
+
   return (
   /* eslint-disable:에러 경고 안 띄워줌 */
   /*useState 안쓰고 그냥 변수+1하면 안바뀜*/
@@ -113,7 +117,7 @@ function App() {
 
                 {
                     modal === true
-                    ? <Modal />
+                    ? <Modal modalTitle={modalTitle} />
                     : null
                 }
                 <div className="modal">
@@ -139,7 +143,7 @@ function App() {
             {
                 프로젝트명.map((각각의값,idx) => {
                     return (
-                        <li>{프로젝트명[idx]}
+                        <li onClick = { () => { setModalTitle(각각의값) } }>{프로젝트명[idx]}
                             <span onClick = { () => {repChange(good,idx) } }>👍</span>
                             <span>
                                 {good[idx]}
@@ -239,10 +243,10 @@ function App() {
   );
 }
 
-function Modal(){
+function Modal(props){
     return (
         <div className="modal">
-            <h2>제목</h2>
+            <h2>{props.modalTitle}</h2>
             <p>날짜</p>
             <p>상세내용</p>
         </div>
