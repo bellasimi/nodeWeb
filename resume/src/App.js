@@ -93,7 +93,12 @@ function App() {
 
     }
 
+/* 모달 내용 변경 함수 */
+    const changeModal = (각각의값,idx) =>{
+        setModalTitle(각각의값)
+        setModalIdx(idx)
 
+    }
 
     function 제목변경(){ /* return 할 때 변수를 { 제목변경 }이라고 해야지 { 제목변경() }하면 오류
     왜냐, 바로 실행하란 뜻이어서 click 안했을 때도 실행함 */
