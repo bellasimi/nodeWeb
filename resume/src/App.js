@@ -77,7 +77,7 @@ function App() {
 
     let [modalTitle,setModalTitle] = useState("모달 제목");
     let [modalIdx,setModalIdx] = useState(0);
-
+    let [inputValue,setInputValue] = useState("");
 
 
   return (
@@ -115,7 +115,8 @@ function App() {
                 <div onClick = { () => { modal변경(!modal); }}>
                     모달 조작 toggle
                 </div>
-
+                <input onChange={ (e)=>{ setInputValue(e.target.value)} } />
+                { inputValue}
                 {
                     modal === true
                     ? <Modal modalTitle={modalTitle} modalIdx={modalIdx} 프로젝트명={프로젝트명}/>
@@ -144,6 +145,7 @@ function App() {
             {
                 프로젝트명.map((각각의값,idx) => {
                     return (
+                    <div key={idx}>
                         <li onClick = { setModalTitle.bind(this,각각의값) }>{프로젝트명[idx]}
                             <span onClick = { () => {repChange(good,idx) } }>👍</span>
                             <span>
@@ -155,7 +157,7 @@ function App() {
                                  {bad[idx]}
                             </span>
                         </li>
-
+                    </div>
                     )
                 })
 
