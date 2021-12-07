@@ -17,15 +17,6 @@ function App() {
     let [프로젝트명, 프로젝트명변경] = useState(["BuyTicketS","Board","nodeWeb"]);
 
 
-    let repArr = [];
-
-    프로젝트명.map(() =>{
-            repArr.push(0)
-    });
-
-    let [good,setGood] = useState(repArr);
-    let [bad,setBad] = useState(repArr);
-
 
     var array = [1,2,3];
 
@@ -39,7 +30,31 @@ function App() {
         return 100;
     }
 
-    /*반복문 함수 */
+/* 프로젝트 길이 유동적 변화 */
+
+    let projectLength = 프로젝트명.length;
+
+
+
+
+
+/* 프로젝트 평가 변수 */
+     let repArr = [];
+
+    /* for(var i=0; i<projectLength; i++){
+        repArr.push(0)
+     }*/
+    프로젝트명.map(() =>{
+            repArr.push(0)
+    });
+
+/* 프로젝트 평가 state*/
+    let [good,setGood] = useState(repArr);
+    let [bad,setBad] = useState(repArr);
+
+
+
+/* 프로젝트 평가 함수*/
 
     const repChange = (rep,idx) => {
         let goodArr = [...good];
@@ -54,6 +69,27 @@ function App() {
             goodArr[idx]+=1;
             setGood(goodArr);
         }
+
+    }
+
+
+/* 프로젝트명 추가*/
+    const saveInput = () => {
+
+    /* state의 unshift() 이용*/
+    프로젝트명.unshift(inputValue)
+    /*   arr복사 후 push 하는 방법
+        let arr = [...프로젝트명]
+        arr.push(inputValue)*/
+    프로젝트명변경(프로젝트명)
+
+    let newRepArr = [];
+    for(var i=0;i<프로젝트명.length+1;i++){
+        newRepArr.push(0);
+    }
+    setGood(newRepArr)/*얘는 프로젝트명만 변경, repArr는 state아니고 일반변수여서 자동으로 변하지만 */
+    setBad(newRepArr)/*good, bad는 따로 set으로 넣어줘야됨*/
+    /*문제 : repArr가 함수내에선 변동이 없음... 그래서 setGood 한텀느림 --> 그냥 프로젝트명.length+1로 arr새로 생성*/
 
     }
 
@@ -115,8 +151,12 @@ function App() {
                 <div onClick = { () => { modal변경(!modal); }}>
                     모달 조작 toggle
                 </div>
-                <input onChange={ (e)=>{ setInputValue(e.target.value)} } />
-                { inputValue}
+                <div className = "publish">
+                    <input onChange={ (e)=> {setInputValue(e.target.value)} }/>
+                    <button value="a" onClick={ saveInput }>저장</button>
+
+                </div>
+
                 {
                     modal === true
                     ? <Modal modalTitle={modalTitle} modalIdx={modalIdx} 프로젝트명={프로젝트명}/>
@@ -146,7 +186,7 @@ function App() {
                 프로젝트명.map((각각의값,idx) => {
                     return (
                     <div key={idx}>
-                        <li onClick = { setModalTitle.bind(this,각각의값) }>{프로젝트명[idx]}
+                        <li onClick = {()=>{changeModal(각각의값,idx)} }>{프로젝트명[idx]}
                             <span onClick = { () => {repChange(good,idx) } }>👍</span>
                             <span>
                                 {good[idx]}
