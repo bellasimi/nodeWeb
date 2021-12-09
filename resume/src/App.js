@@ -76,12 +76,19 @@ function App() {
 /* 프로젝트명 추가*/
     const saveInput = () => {
 
-    /* state의 unshift() 이용*/
-    프로젝트명.unshift(inputValue)
+    /* state의 unshift() 이용
+
+    나쁜 방법
+        프로젝트명.unshift(inputValue)
+        프로젝트명변경(프로젝트명)
+    좋은 방법 : 복사본 만들어서 변경   */
+    let arr = [...프로젝트명]
+    arr.unshift(inputValue)
+
     /*   arr복사 후 push 하는 방법
         let arr = [...프로젝트명]
         arr.push(inputValue)*/
-    프로젝트명변경(프로젝트명)
+    프로젝트명변경(arr)
 
     let newRepArr = [];
     for(var i=0;i<프로젝트명.length+1;i++){
@@ -207,6 +214,7 @@ function App() {
                 })
 
             }
+            <p></p>
             <button onClick={setModalIdx.bind(null,0)}>0</button>
             <button onClick={()=>{setModalIdx(1)}}>1</button>
             <button onClick={()=>{setModalIdx(2)}}>2</button>
