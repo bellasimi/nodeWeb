@@ -16,7 +16,7 @@ function App() {
     let [modal,modal변경] = useState(true); /* Modal창 변경 스위치 */
     let [프로젝트명, 프로젝트명변경] = useState(["BuyTicketS","Board","nodeWeb"]);
 
-
+    let [profile,setProfile] = useState(false)
 
     var array = [1,2,3];
 
@@ -279,8 +279,11 @@ function App() {
                     </li>
                 </ul>
             </div>
-
-
+        <button onClick= { setProfile.bind(this,!profile) }>프로필 열기</button>
+        { profile==true
+            ?<Profile></Profile>
+            :null
+        }
 
     </div>
     /*<header className="App-header">
@@ -312,5 +315,39 @@ function Modal(props){
     );
 }
 
+
+/* 옛날 방법 컴포넌트 만들기*/
+
+class Profile extends React.Component {
+    constructor(){
+        super();
+        this.state = {name : 'Hah', age : 99}
+    }
+
+    changeAge(){
+        this.setState({age : 19})
+    }
+    /*
+     changeAge = () => {
+            this.setState({age : 19})
+        }
+    */
+
+
+    render(){
+        return(
+            <div>
+                <h1>옛날 방법 컴포넌트 만들기</h1>
+                <li>이름 : {this.state.name}</li>
+                <li>나이 : {this.state.age}</li>
+                <button onClick={ ()=> {this.setState({name:'Choi'})}}>이름변경</button>
+                /*setState함수는 하나의 요소만 바꾸는 것 가능, */
+                <button onClick={()=>{ this.changeAge.bind(this) }}>나이변경</button>
+                /* bind함수로 this를 명시해 줘야 오류가 안남, bind 쓰기 싫으면 changeAge를 변수화*/
+            </div>
+        )
+
+    }
+}
 
 export default App;
