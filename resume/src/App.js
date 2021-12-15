@@ -219,66 +219,11 @@ function App() {
             <button onClick={()=>{setModalIdx(1)}}>1</button>
             <button onClick={()=>{setModalIdx(2)}}>2</button>
             <h1>프로젝트 상세</h1>
-            <div>
-               {projects.BTS.title}
-               티켓 할인 구매 사이트
 
-               <ul>
-                   <li>
-                   개발 스택 : {projects.BTS.stack}
-                   </li>
-                   <li>
-                   개발 환경 : {projects.BTS.tool}
-                   </li>
-                   <li>
-                   Github : {projects.BTS.git}
-                   </li>
-                   <li>
-                   시연영상 :
-                   </li>
-               </ul>
+            <Project1 projects = {projects}/>
 
-           </div>
 
-            <div>
-            {projects.Board.title}
-                기술 관련 게시판
 
-                <ul>
-                    <li>
-                    개발 스택 :{projects.Board.stack}
-                    </li>
-                    <li>
-                    개발 환경 : {projects.Board.tool}
-                    </li>
-                    <li>
-                    Github :{projects.Board.git}
-                    </li>
-                    <li>
-                    시연영상 :
-                    </li>
-                </ul>
-            </div>
-
-            <div>
-                <p>
-                웹 개발 관련 블로그
-                </p>
-                <ul>
-                    <li>
-                    개발 스택 :
-                    </li>
-                    <li>
-                    개발 환경 :
-                    </li>
-                    <li>
-                    Github :
-                    </li>
-                    <li>
-                    시연영상 :
-                    </li>
-                </ul>
-            </div>
         <button onClick= { setProfile.bind(this,!profile) }>프로필 열기</button>
         { profile==true
             ?<Profile></Profile>
@@ -317,7 +262,6 @@ function Modal(props){
 
 
 /* 옛날 방법 컴포넌트 만들기*/
-
 class Profile extends React.Component {
     constructor(){
         super();
@@ -348,6 +292,74 @@ class Profile extends React.Component {
         )
 
     }
+}
+
+function Project1(props){
+
+    return(
+    <div>
+            <div className = "projectList">
+               <h3>
+                    {props.projects.BTS.title} :  티켓 할인 구매 사이트
+               </h3>
+               <ul>
+                   <li>
+                   개발 스택 : {props.projects.BTS.stack}
+                   </li>
+                   <li>
+                   개발 환경 : {props.projects.BTS.tool}
+                   </li>
+                   <li>
+                   Github : {props.projects.BTS.git}
+                   </li>
+                   <li>
+                   시연영상 :
+                   </li>
+               </ul>
+
+            </div>
+            <div className = "projectList">
+                <h3>
+                    {props.projects.Board.title} : 기술 관련 게시판
+                </h3>
+                <ul>
+                    <li>
+                    개발 스택 :{props.projects.Board.stack}
+                    </li>
+                    <li>
+                    개발 환경 : {props.projects.Board.tool}
+                    </li>
+                    <li>
+                    Github :{props.projects.Board.git}
+                    </li>
+                    <li>
+                    시연영상 :
+                    </li>
+                </ul>
+            </div>
+
+            <div className = "projectList">
+                <h3>
+                    웹 개발 관련 블로그
+                </h3>
+                <ul>
+                    <li>
+                    개발 스택 :
+                    </li>
+                    <li>
+                    개발 환경 :
+                    </li>
+                    <li>
+                    Github :
+                    </li>
+                    <li>
+                    시연영상 :
+                    </li>
+                </ul>
+            </div>
+    </div>
+    )
+
 }
 
 export default App;
