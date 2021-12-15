@@ -107,6 +107,10 @@ function App() {
 
     }
 
+/* project1 컴포넌트 조작*/
+
+    let [project1,setProject1] = useState(false);
+
     function 제목변경(){ /* return 할 때 변수를 { 제목변경 }이라고 해야지 { 제목변경() }하면 오류
     왜냐, 바로 실행하란 뜻이어서 click 안했을 때도 실행함 */
         글제목변경(글제목 = ['이력서작성3','이력서 제출']);
@@ -126,6 +130,7 @@ function App() {
     let [modalTitle,setModalTitle] = useState("모달 제목");
     let [modalIdx,setModalIdx] = useState(0);
     let [inputValue,setInputValue] = useState("");
+
 
 
   return (
@@ -218,9 +223,15 @@ function App() {
             <button onClick={setModalIdx.bind(null,0)}>0</button>
             <button onClick={()=>{setModalIdx(1)}}>1</button>
             <button onClick={()=>{setModalIdx(2)}}>2</button>
-            <h1>프로젝트 상세</h1>
+            <h1 onClick={setProject1.bind(this,!project1)}>프로젝트 상세</h1>
 
-            <Project1 projects = {projects}/>
+            {
+                project1 === true
+                ? <Project1 projects = {projects}/>
+                : null
+
+            }
+
 
 
 
