@@ -152,7 +152,11 @@ function App() {
             </div>
         </nav>
          <img src={logo} className="App-logo" alt="logo" />
-
+         <h1 onClick= { setProfile.bind(this,!profile) }>프로필</h1>
+         { profile==true
+             ?<Profile></Profile>
+             :null
+         }
             <div className="Resume">
 
                 <p>
@@ -235,11 +239,7 @@ function App() {
 
 
 
-        <button onClick= { setProfile.bind(this,!profile) }>프로필 열기</button>
-        { profile==true
-            ?<Profile></Profile>
-            :null
-        }
+
 
     </div>
     /*<header className="App-header">
@@ -292,12 +292,12 @@ class Profile extends React.Component {
     render(){
         return(
             <div>
-                <h1>옛날 방법 컴포넌트 만들기</h1>
+                <p>옛날 방법 컴포넌트 만들기</p>
                 <li>이름 : {this.state.name}</li>
                 <li>나이 : {this.state.age}</li>
                 <button onClick={ ()=> {this.setState({name:'Choi'})}}>이름변경</button>
                 /*setState함수는 하나의 요소만 바꾸는 것 가능, */
-                <button onClick={()=>{ this.changeAge.bind(this) }}>나이변경</button>
+                <button onClick={this.changeAge.bind(this)}>나이변경</button>
                 /* bind함수로 this를 명시해 줘야 오류가 안남, bind 쓰기 싫으면 changeAge를 변수화*/
             </div>
         )
