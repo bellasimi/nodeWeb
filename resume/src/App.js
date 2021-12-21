@@ -137,6 +137,7 @@ function App() {
   /* eslint-disable:에러 경고 안 띄워줌 */
   /*useState 안쓰고 그냥 변수+1하면 안바뀜*/
     <div className="App">
+
         <nav>
             <div className="nav_logo">개발의 SHIN </div>
             <div className="nav_menu">
@@ -166,15 +167,15 @@ function App() {
                     <span onClick ={ () => { 비추변경(비추+1) }}>👎</span>
                     <span> { 비추 } </span>
                 </p>
-                <button onClick = {() => { modal변경(false)}}>창닫기</button>
-                <button onClick = {() => { modal변경(true)}}>창열기</button>
+                <button onClick = {() => { modal변경(false)}} class="btn btn-danger">창닫기</button>
+                <button onClick = {() => { modal변경(true)}} class="btn btn-danger">창열기</button>
 
                 <div onClick = { () => { modal변경(!modal); }}>
                     모달 조작 toggle
                 </div>
                 <div className = "publish">
                     <input onChange={ (e)=> {setInputValue(e.target.value)} }/>
-                    <button value="a" onClick={ saveInput }>저장</button>
+                    <button value="a" onClick={ saveInput } class="btn btn-danger">저장</button>
 
                 </div>
 
@@ -295,9 +296,9 @@ class Profile extends React.Component {
                 <p>옛날 방법 컴포넌트 만들기</p>
                 <li>이름 : {this.state.name}</li>
                 <li>나이 : {this.state.age}</li>
-                <button onClick={ ()=> {this.setState({name:'Choi'})}}>이름변경</button>
+                <button onClick={ ()=> {this.setState({name:'Choi'})}} class="btn btn-danger">이름변경</button>
                 /*setState함수는 하나의 요소만 바꾸는 것 가능, */
-                <button onClick={this.changeAge.bind(this)}>나이변경</button>
+                <button onClick={this.changeAge.bind(this)} class="btn btn-danger">나이변경</button>
                 /* bind함수로 this를 명시해 줘야 오류가 안남, bind 쓰기 싫으면 changeAge를 변수화*/
             </div>
         )
