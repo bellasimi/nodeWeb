@@ -18,8 +18,26 @@
     <a class="nav-link" href="/write">write</a>
     <a class="nav-link disabled">Disabled</a>
 </nav>
-<h1>Hello, world!</h1>
+<h1>입력창</h1>
 
+<form action="/newMember" method="post">
+
+    <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label" >Name</label>
+        <input type="text" class="form-control" id="exampleInputName1" name="name" >
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label" >Password</label>
+        <input type="password" class="form-control" id="exampleInputPassword1" name="pw">
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Email address</label>
+        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"  name="email">
+        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
 <!-- Optional JavaScript; choose one of the two! -->
 
 <!-- Option 1: Bootstrap Bundle with Popper -->
