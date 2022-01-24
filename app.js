@@ -9,7 +9,9 @@ const MongoClient = require('mongodb').MongoClient;
 const app = express();
 const port = 8282
 
+
 /* view 엔진 등록
+
 app.set("views",__dirname+"/views");
 app.set("view engine","pug");
 */
@@ -18,16 +20,7 @@ app.set("views",__dirname+"/views");
 app.set("view engine", "ejs")
 
 
-app.post('/newMember', (req,res)=> {
-    db.collection('post').insertOne({ name : req.body.name, pw : req.body.pw, email : req.body.email },( error, result)=>{
-        if(error) console.log('에러!')
-        console.log('잘됨'+JSON.stringify(result))
 
-    })
-
-    res.send('저장완료!')
-
-})
 
 
 /* 정적 자산 설정 */
@@ -40,6 +33,7 @@ app.use(bodyParser.urlencoded({extended : true }))
 
 /* 서버 연결
 
+
 app.listen(port,() => console.log("server : http://localhost:8282"));
 
 const http = require('http').createServer(app);
@@ -47,6 +41,8 @@ const http = require('http').createServer(app);
 http.listen(port,() => console.log("server : http://localhost:8282"));
 
 */
+
+
 
 
 var db;
@@ -96,6 +92,17 @@ app.get("/home", (req,res) => {
 
 app.get("/write",(req,res)=>{
     res.sendFile(__dirname+"/write.html");
+
+})
+
+app.post('/newMember', (req,res)=> {
+    db.collection('post').insertOne({ name : req.body.name, pw : req.body.pw, email : req.body.email },( error, result)=>{
+        if(error) console.log('에러!')
+        console.log('잘됨'+JSON.stringify(result))
+
+    })
+
+    res.send('저장완료!')
 
 })
 
