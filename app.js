@@ -89,3 +89,24 @@ app.get("*",(req,res) => {
 });
 */
 
+/* 연습 */
+app.get("/home", (req,res) => {
+    res.sendFile(__dirname+"/practice.html");
+})
+
+app.get("/write",(req,res)=>{
+    res.sendFile(__dirname+"/write.html");
+
+})
+
+app.get("/list",(req,res)=>{
+
+    db.collection('post').find().toArray((error,result)=>{
+        if(error) console.log(error)
+        console.log(result);
+
+
+        res.render("list", { data : result});
+    });
+
+})
