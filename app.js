@@ -96,11 +96,29 @@ app.get("/write",(req,res)=>{
 })
 
 app.post('/newMember', (req,res)=> {
-    db.collection('post').insertOne({ name : req.body.name, pw : req.body.pw, email : req.body.email },( error, result)=>{
-        if(error) console.log('에러!')
+
+    let _id;
+
+    /* _id생성 */
+    db.collection('addID').findOne({name: 'counter'}, (error, result)=> {
+        if(error) console.log('id findOne 에러');
+        _id = result.addId;
+        console.log(_id);
+
+    });
+
+    /* post */
+    db.collection('post').insertOne({ _id: _id,name : req.body.name, pw : req.body.pw, email : req.body.email },( error, result)=>{
+        if(error) console.log('post 에러!')
         console.log('잘됨'+JSON.stringify(result))
 
     })
+
+    /* id 증가 */
+    db.collection('addID').updateOne({ name: 'counter'},{ $inc: { addId: 1 }}, (error, result)=>{
+        if(error) console.log('id update 에러')
+    } )
+
 
     res.send('저장완료!')
 
