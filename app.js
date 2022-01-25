@@ -65,13 +65,76 @@ MongoClient.connect('mongodb+srv://bellasimi:1234@cluster0.624oa.mongodb.net/nod
 })
 
 
-
-
 /* main */
 app.get("/",(req,res) => {
     console.log("hello world!");
-    res.render("readme");
+    res.render("write");
 });
+
+
+/* 회원가입 폼 */
+app.get("/write",(req,res)=>{
+    res.sendFile(__dirname+"/write.html");
+
+})
+
+
+/* 회원 가입*/
+app.post('/newMember', (req,res)=> {
+
+    let _id;
+
+    /* _id생성 */
+    db.collection('addID').findOne({name: 'counter'}, (error, result)=> {
+        if(error) console.log('id findOne 에러');
+        _id = result.addId;
+        console.log(_id);
+        /* post */
+        db.collection('post').insertOne({ _id: _id,name : req.body.name, pw : req.body.pw, email : req.body.email },( error, result)=>{
+            if(error) console.log('post 에러!')
+            res.redirect('/list')
+
+        })
+
+    });
+
+
+
+    /* id 증가 */
+    db.collection('addID').updateOne({ name: 'counter'},{ $inc: { addId: 1 }}, (error, result)=>{
+        if(error) console.log('id update 에러')
+    } )
+
+
+
+})
+
+/* 회원 목록 */
+app.get("/list",(req,res)=>{
+
+    db.collection('post').find().toArray((error,result)=>{
+        if(error) console.log(error)
+        console.log(result);
+
+
+        res.render("list", { data : result});
+    });
+
+})
+
+/* 회원 삭제 */
+app.delete("/delete", (req,res)=>{
+    console.log(req.body);//{_id: _id값}
+    req.body._id = parseInt(req.body._id);
+
+    db.collection('post').deleteOne(req.body,(error,result)=>{
+        if(error) console.log('회원 삭제 에러')
+        res.status(200).send({ msg: '회원삭제 성공!'})
+    })
+
+
+})
+
 
 /* react 컴포넌트 하나 띄우기 라우팅 한됨*/
 app.get("/resume",(req,res) => {
@@ -85,53 +148,8 @@ app.get("*",(req,res) => {
 });
 */
 
+
 /* 연습 */
 app.get("/home", (req,res) => {
     res.sendFile(__dirname+"/practice.html");
-})
-
-app.get("/write",(req,res)=>{
-    res.sendFile(__dirname+"/write.html");
-
-})
-
-app.post('/newMember', (req,res)=> {
-
-    let _id;
-
-    /* _id생성 */
-    db.collection('addID').findOne({name: 'counter'}, (error, result)=> {
-        if(error) console.log('id findOne 에러');
-        _id = result.addId;
-        console.log(_id);
-
-    });
-
-    /* post */
-    db.collection('post').insertOne({ _id: _id,name : req.body.name, pw : req.body.pw, email : req.body.email },( error, result)=>{
-        if(error) console.log('post 에러!')
-        console.log('잘됨'+JSON.stringify(result))
-
-    })
-
-    /* id 증가 */
-    db.collection('addID').updateOne({ name: 'counter'},{ $inc: { addId: 1 }}, (error, result)=>{
-        if(error) console.log('id update 에러')
-    } )
-
-
-    res.send('저장완료!')
-
-})
-
-app.get("/list",(req,res)=>{
-
-    db.collection('post').find().toArray((error,result)=>{
-        if(error) console.log(error)
-        console.log(result);
-
-
-        res.render("list", { data : result});
-    });
-
 })
