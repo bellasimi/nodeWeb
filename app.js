@@ -122,7 +122,7 @@ app.get("/list",(req,res)=>{
 
 /* 회원 삭제 */
 app.delete("/delete", (req,res)=>{
-    console.log(req.body);//{_id: _id값}
+    console.log("회원 _id: "+req.body);//{_id: _id값}
     req.body._id = parseInt(req.body._id);
 
     db.collection('post').deleteOne(req.body,(error,result)=>{
@@ -184,6 +184,14 @@ app.delete("/deleteGoods", (req,res)=>{
 
 })
 
+/* 상품 상세 */
+app.get('/detail/:id',(req,res)=>{
+    let _id = parseInt(req.params.id)
+    db.collection('goods').findOne({_id:_id},(error,result)=>{
+	    if(error) console.log('상세페이지 출력 에러!')
+	    res.render('detail.ejs' , { data: result })
+    })
+})
 
 /* react 컴포넌트 하나 띄우기 라우팅 한됨*/
 app.get("/resume",(req,res) => {
