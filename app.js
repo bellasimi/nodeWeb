@@ -45,6 +45,7 @@ http.listen(port,() => console.log("server : http://localhost:8282"));
 
 
 
+
 var db;
 
 
@@ -172,7 +173,16 @@ app.get("/goodsList",(req,res)=>{
 
 })
 
+/* 상품삭제*/
 
+app.delete("/deleteGoods", (req,res)=>{
+    req.body._id = parseInt(req.body._id)
+    db.collection("goods").deleteOne(req.body,(error,result)=>{
+        if(error) console.log("상품삭제 에러!")
+        res.send({ msg: "상품삭제 성공!"})
+    })
+
+})
 
 
 /* react 컴포넌트 하나 띄우기 라우팅 한됨*/
