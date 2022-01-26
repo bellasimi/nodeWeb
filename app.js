@@ -4,6 +4,7 @@ const express = require("express");
 const path = require("path");
 const bodyParser = require("body-parser");
 const MongoClient = require('mongodb').MongoClient;
+const methodOverride = require('method-override');
 
 /*웹서버 생성*/
 const app = express();
@@ -26,10 +27,11 @@ app.set("view engine", "ejs")
 /* 정적 자산 설정 */
 /* node 프로젝트 */
 app.use("/",express.static(path.join(__dirname,"public")));
-
+app.use(bodyParser.urlencoded({extended : true }))//post 전송값 req.body로 받음
+app.use(methodOverride('_method'))
 /* react 프로젝트 */
 app.use("/resume",express.static(path.join(__dirname,"resume/build")));
-app.use(bodyParser.urlencoded({extended : true }))
+
 
 /* 서버 연결
 
@@ -69,13 +71,14 @@ MongoClient.connect('mongodb+srv://bellasimi:1234@cluster0.624oa.mongodb.net/nod
 /* main */
 app.get("/",(req,res) => {
     console.log("hello world!");
-    res.render("write");
+    res.render("newMemberForm");
 });
 
 
 /* 회원가입 폼 */
 app.get("/write",(req,res)=>{
-    res.sendFile(__dirname+"/write.html");
+   /* res.sendFile(__dirname+"/write.html");*/
+   res.render('newMemberForm');
 
 })
 
@@ -183,6 +186,39 @@ app.delete("/deleteGoods", (req,res)=>{
     })
 
 })
+
+/* 상품 수정 폼 */
+app.get('/updateGoodsForm/:id',(req,res)=>{
+    let _id = parseInt(req.params.id)
+    /* 수정폼에 보일 기존 값들 전송 */
+    db.collection('goods').findOne({ _id:_id},(error,result)=>{
+        if(error) console.log('수정폼에 DB값 불러오기 에러')
+        res.render('updateGoods',{ data: result })
+    })
+})
+
+/* 상품 수정 */
+app.put('/updateGoods',(req,res)=>{
+/*  let _id = parseInt(req.params.id);*/
+
+    let _id = parseInt(req.body.id);
+    let name = req.body.name;
+    let price = req.body.price;
+    let description = req.body.description;
+
+/*    console.log(_id)
+    console.log(name)
+    console.log(price)
+    console.log(description)*/
+
+    db.collection('goods').updateOne({ _id:_id }, {$set: { name:name, price:price, description:description }},(error,result)=>{
+            if(error) console.log('updateGoods 에러!')
+            res.redirect('/goodsList')
+    })
+
+
+})
+
 
 /* 상품 상세 */
 app.get('/detail/:id',(req,res)=>{
