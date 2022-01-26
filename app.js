@@ -136,6 +136,36 @@ app.delete("/delete", (req,res)=>{
 })
 
 
+/* 상품 입력폼 */
+app.get("/addGoodsForm",(req,res)=>{
+    res.render("addGoods")
+})
+
+
+/* 상품 입력 */
+app.post("/addGoods",(req,res)=>{
+
+    /* 상품 _id 부여 */
+    db.collection("addID").findOne({name: "counter"},(error,result)=>{
+        let _id = result.addGoodsId;
+
+        /* 상품 DB에 추가 */
+        db.collection("goods").insertOne({ _id:_id, name: req.body.name, price: req.body.price, description: req.body.description },
+            (error,result)=>{
+                    if(error) console.log("상품 입력 에러!");
+        })
+    })
+
+    /* 상품 _id 증가 */
+    db.collection("counter").updateOne({ name: "counter"},{$inc: { addGoodsId: 1}}, (error,result)=>{
+        if(error) console.log("상품 id update 에러");
+    })
+
+    res.send("goodsList")
+})
+
+
+
 /* react 컴포넌트 하나 띄우기 라우팅 한됨*/
 app.get("/resume",(req,res) => {
     res.sendFile(path.join(__dirname,"resume/build/index.html"));
