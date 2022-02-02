@@ -250,6 +250,19 @@ app.post('/login', passport.authenticate('local',
 	    res.redirect('/mypage')//성공시 마이페이지로 보내줌
 });
 
+/* 마이페이지 */
+function didLogin(req,res,next){
+	if(req.user){
+		next()// 존재하면 다음으로 통과
+	}else{
+		res.send('로그인 안함!')
+	}
+}
+
+app.get('/mypage', didLogin ,(req,res)=>{
+	res.render('mypage',{ user: req.user})
+})
+
 /* react 컴포넌트 하나 띄우기 라우팅 한됨*/
 app.get("/resume",(req,res) => {
     res.sendFile(path.join(__dirname,"resume/build/index.html"));
