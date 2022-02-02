@@ -29,6 +29,10 @@ app.set("view engine", "ejs")
 app.use("/",express.static(path.join(__dirname,"public")));
 app.use(bodyParser.urlencoded({extended : true }))//post 전송값 req.body로 받음
 app.use(methodOverride('_method'))
+/* session으로 로그인 미들웨어 */
+app.use(session({secret: '비밀코드', resave: true, saveUninitialized: false}));
+app.use(passport.initialize());
+app.use(passport.session());
 /* react 프로젝트 */
 app.use("/resume",express.static(path.join(__dirname,"resume/build")));
 
@@ -228,6 +232,18 @@ app.get('/detail/:id',(req,res)=>{
 	    res.render('detail.ejs' , { data: result })
     })
 })
+
+/* 로그인 폼 */
+app.get('/loginForm',(req,res)=>{
+    res.render('login')
+})
+
+/* 로그인 */
+app.post('/login', passport.authenticate('local',
+    {failureRedirect : '/loginFail' /*회원인증 실패시 보낼 url*/ }),
+    (req,res)=>{
+	    res.redirect('/mypage')//성공시 마이페이지로 보내줌
+});
 
 /* react 컴포넌트 하나 띄우기 라우팅 한됨*/
 app.get("/resume",(req,res) => {
