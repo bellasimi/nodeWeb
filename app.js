@@ -5,6 +5,11 @@ const path = require("path");
 const bodyParser = require("body-parser");
 const MongoClient = require('mongodb').MongoClient;
 const methodOverride = require('method-override');
+const passport = require('passport');
+const LocalStrategy = require('passport-local');
+const session = require('express-session');
+
+
 
 /*웹서버 생성*/
 const app = express();
@@ -262,3 +267,40 @@ app.get("*",(req,res) => {
 app.get("/home", (req,res) => {
     res.sendFile(__dirname+"/practice.html");
 })
+
+/* passport */
+
+passport.use(new LocalStrategy({
+    usernameField: 'name',
+    passwordField: 'pw' ,
+    session: true,
+    passReqToCallback: false,
+}, function (name, pw, done) {
+    db.collection('post').findOne({ name: name }, (error,result)=>{
+        if(error) return done(error)
+
+        if(!result) return done(null, false, { msg: ' 존재하지 않는 이름!'})
+        if( pw === result.pw) {
+            return done(null,result)
+        }else{
+            return done(null,false, { msg: '비번이 틀립니다!' })
+        }
+
+    })
+}));
+
+/* session*/
+passport.serializeUser((user,done)=>{
+	done(null,user.name)
+})
+
+
+passport.deserializeUser((name, done )=>{
+	db.collection('post').findOne({name: name },(error,result)=>{
+		if(error)console.log('해당 이름으로 데이터가 없습니다.')
+		done(null,result)//해당 결과를 보여줌-> mypage의 req.user로 받기
+	})
+
+})
+
+
